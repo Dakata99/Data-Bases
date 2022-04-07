@@ -1,4 +1,4 @@
-# Database (Бази от данни)
+# Databases (Бази от данни)
 
 ## Lectures (Лекции)
 
