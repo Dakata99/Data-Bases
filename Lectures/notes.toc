@@ -1,8 +1,0 @@
-\babel@toc {bulgarian}{}
-\contentsline {section}{\numberline {1}Прости заявки в SQL}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Въведение}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Проекция}{4}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Селекция}{5}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Сравняване на низове}{5}{subsection.1.4}%
-\contentsline {subsection}{\numberline {1.5}NULL стойности}{5}{subsection.1.5}%
-\contentsline {subsection}{\numberline {1.6}Сортиране на резултата}{6}{subsection.1.6}%
