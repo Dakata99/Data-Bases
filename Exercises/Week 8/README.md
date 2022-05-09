@@ -5,6 +5,10 @@
 
 ## Ограничения - задачи Резюме:
 
+<details>
+
+<summary>Теория</summary>
+
 ### PRIMARY KEY
 <ul>
     <li>може от един или повече атрибути</li>
@@ -33,6 +37,7 @@
 NOT NULL
 
 CHECK
+</details>
 
 <details>
 
@@ -82,9 +87,9 @@ CHECK
 
 <details>
 
-<summary>Задача 3</summary>
+<summary>Задача 4</summary>
 
-Създайте нова база от данни с име test.  
+Създайте нова база от данни с име test.
 Дефинирайте следните релации:
 <ul>
     <li>Product(maker, model, type), където моделът е низ от точно 4 символа, maker - един символ, а type - низ до 7 символа</li>
