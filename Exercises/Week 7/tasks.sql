@@ -1,4 +1,4 @@
-USE danail
+USE DANAIL
 
 BEGIN TRANSACTION
 
@@ -29,7 +29,62 @@ DELETE FROM PRODUCT
 WHERE MODEL = '1100'
 
 -- 6
+INSERT INTO LAPTOP(CODE, MODEL, SPEED, RAM, HD, PRICE, SCREEN)
+SELECT CODE + 100, MODEL, SPEED, RAM, HD, PRICE + 500, 15 FROM PC
 
+-- 7
+DELETE FROM LAPTOP
+WHERE MODEL IN (SELECT MODEL
+                FROM PRODUCT
+                WHERE type='Laptop' AND MAKER NOT IN (SELECT DISTINCT MAKER
+                                                      FROM PRODUCT
+                                                      WHERE TYPE = 'Printer'))
 
+-- 8
+UPDATE PRODUCT SET MAKER = 'A'
+WHERE MAKER = 'B'
+
+-- 9
+UPDATE PC SET PRICE = PRICE / 2, HD = HD + 20
+
+-- 10
+UPDATE LAPTOP SET SCREEN = SCREEN + 1
+WHERE MODEL IN (SELECT MODEL
+                FROM PRODUCT
+                WHERE MAKER = 'B')
+
+-- 11
+INSERT INTO CLASSES
+VALUES ('Nelson', 'bb', 'Gt.Britain', 9, 16, 34000)
+
+INSERT INTO SHIPS
+VALUES ('Nelson', 'Nelson', 1927), ('Rodney', 'Nelson', 1927)
+
+-- 12
+DELETE FROM SHIPS
+WHERE NAME IN (SELECT DISTINCT SHIP
+              FROM OUTCOMES
+              WHERE RESULT = 'sunk')
+
+-- 13
+UPDATE CLASSES SET BORE = BORE * 2.54,
+                   DISPLACEMENT = DISPLACEMENT / 1.1
+
+-- 14
+DELETE FROM CLASSES
+WHERE CLASS NOT IN (SELECT CLASS
+                    FROM SHIPS
+                    GROUP BY CLASS
+                    HAVING COUNT(*) >= 3)
+
+-- 15
+UPDATE CLASSES
+SET BORE = (SELECT BORE
+            FROM CLASSES
+            WHERE CLASS = 'Bismarck'),
+    DISPLACEMENT = (SELECT DISPLACEMENT
+                    FROM CLASSES
+                    WHERE CLASS ='Bismarck')
+WHERE CLASS = 'Iowa'
 
 ROLLBACK
