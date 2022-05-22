@@ -4,6 +4,7 @@ USE DANAIL
 
     -- 1.1
     ALTER TABLE MOVIE ADD CONSTRAINT UNIQUE_LENGTH UNIQUE(LENGTH)
+    -- Няма да работи, ако вече има два филма с еднаква дължина.
 
     -- 1.2
     ALTER TABLE MOVIE ADD CONSTRAINT UNIQUE_LENGTH_STUDIO UNIQUE(LENGTH) -- ???
