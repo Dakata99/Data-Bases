@@ -15,7 +15,7 @@ AS
     INSERT INTO STARSIN (MOVIETITLE, MOVIEYEAR, STARNAME)
     SELECT TITLE, YEAR, 'Bruce Willis'
     FROM inserted
-    WHERE title LIKE '%save%' AND TITLE LIKE '%world%'
+    WHERE TITLE LIKE '%save%' AND TITLE LIKE '%world%'
 GO
 
 -- 1.2. Да се направи така, че да не е възможно средната стойност на Networth 
@@ -53,7 +53,8 @@ WHERE CERT# IN (SELECT CERT# FROM deleted)
 GO
 
 -- 1.4. При добавяне на нов запис в StarsIn, ако новият ред указва несъществуващ 
--- филм или актьор, да се добавят липсващите данни в съответната таблица -- (неизвестните данни да бъдат NULL). Внимание: има външни ключове!
+-- филм или актьор, да се добавят липсващите данни в съответната таблица 
+-- (неизвестните данни да бъдат NULL). Внимание: има външни ключове!
 
 USE MOVIES GO
 
@@ -148,18 +149,18 @@ CREATE TRIGGER PcTrigger1
 ON PC
 AFTER INSERT, UPDATE
 AS
-    DECLARE @numFound int = (   SELECT COUNT(DISTINCT i.CODE)
+    DECLARE @numFound INT = (   SELECT COUNT(DISTINCT i.CODE)
                                 FROM inserted i
                                     JOIN PRODUCT p1 ON i.MODEL = p1.MODEL
                                     JOIN PRODUCT p2 ON p1.MAKER = p2.MAKER
                                     JOIN LAPTOP l ON p2.MODEL = l.MODEL
                                 WHERE i.SPEED <= l.SPEED)
 
-IF @numFound != (SELECT COUNT(*) FROM inserted)
-BEGIN
-    RAISERROR('Data Integrity Violation', 11, 1)
-    ROLLBACK
-END
+    IF @numFound != (SELECT COUNT(*) FROM inserted)
+    BEGIN
+        RAISERROR('Data Integrity Violation', 11, 1)
+        ROLLBACK
+    END
 GO
 
 -- Тригер за PC -- Вариант 2

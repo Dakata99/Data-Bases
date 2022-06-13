@@ -120,19 +120,18 @@ HAVING COUNT(SHIP) > (  SELECT COUNT(SHIP)
 
 -- 5. Напишете заявка, която извежда имената на битките, които са по-мащабни (с
 -- повече участващи страни) от битката при Guadalcanal.
--- ??
-SELECT c.COUNTRY, COUNT(o.SHIP)
+-- CORRECT?
+SELECT o.BATTLE
 FROM OUTCOMES o
     JOIN SHIPS s ON s.NAME = o.SHIP
     JOIN CLASSES c ON c.CLASS = s.CLASS
-WHERE BATTLE = 'Guadalcanal'
-GROUP BY c.COUNTRY
-
-SELECT *
-FROM OUTCOMES o
-    JOIN SHIPS s ON s.NAME = o.SHIP
-    JOIN CLASSES c ON c.CLASS = s.CLASS
-WHERE BATTLE = 'Guadalcanal'
+WHERE BATTLE != 'Guadalcanal'
+GROUP BY o.BATTLE
+HAVING COUNT(DISTINCT c.COUNTRY) > (SELECT COUNT(DISTINCT c.COUNTRY)
+                                    FROM OUTCOMES o
+                                        JOIN SHIPS s ON s.NAME = o.SHIP
+                                        JOIN CLASSES c ON c.CLASS = s.CLASS
+                                    WHERE BATTLE = 'Guadalcanal')
 
 -- 6. Да се напише заявка, която извежда имената на най-тежките кораби с най-малко оръдия.
 -- CORRECT?

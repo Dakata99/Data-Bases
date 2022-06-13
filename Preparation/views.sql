@@ -17,9 +17,9 @@ GO
 
 SELECT NAME, NUMGUNS, DISPLACEMENT
 FROM BritishShips
-WHERE LAUNCHED = 1917
+WHERE LAUNCHED < 1917
 
--- 3. Напищете съответната SQL заявка, реализираща задача 2, но без да използвате изглед
+-- 3. Напишете съответната SQL заявка, реализираща задача 2, но без да използвате изглед
 
 SELECT s.NAME, c.NUMGUNS, c.DISPLACEMENT
 FROM CLASSES c

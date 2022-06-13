@@ -111,6 +111,16 @@ HAVING MAX(LAUNCHED) <= 1921
 
 -- 19. (*) За всеки кораб намерете броя на битките, в които е бил увреден. Ако корабът не е
 -- участвал в битки или пък никога не е бил увреждан, в резултата да се вписва 0.
+SELECT s.NAME, COUNT(o.RESULT)
+FROM SHIPS s
+    LEFT OUTER JOIN OUTCOMES o ON s.NAME = o.SHIP AND o.RESULT = 'damaged'
+GROUP BY s.NAME
 
 -- 20. (*) Намерете за всеки клас с поне 3 кораба броя на корабите от този клас, които са победили
 -- в битка.
+SELECT s.CLASS, COUNT(o.RESULT) AS WINS
+FROM SHIPS s
+    LEFT JOIN (SELECT * FROM OUTCOMES WHERE RESULT = 'ok') o ON o.SHIP = s.NAME
+GROUP BY s.CLASS
+HAVING COUNT(s.CLASS) > 3
+ORDER BY CLASS
